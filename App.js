@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import Home from './Home';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import Program from './Program';
+import { styles } from './styles';
 
+const Stack = createStackNavigator();
+
+const initializeAsyncStorage = async () => {
+  try {
+    await AsyncStorage.setItem('initialized', 'true');
+    console.log('AsyncStorage initialized successfully.');
+  } catch (error) {
+    console.log('Error initializing AsyncStorage:', error);
+  }
+};
+
+initializeAsyncStorage();
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Home' }} />
+        <Stack.Screen name="Sign In Page" component={SignIn} options={{ title: 'Sign In ' }} />
+        <Stack.Screen name='Sign Up Page' component={SignUp} options={{title: 'Sign Up'}}/>
+        <Stack.Screen name='Program' component={Program} options={{title: 'Program'}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
