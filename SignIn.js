@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, TextInput, Button } from 'react-native'
 import { styles } from './styles';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,8 +12,8 @@ function SignIn() {
     password: ''
   })
 
-  const [userSignedIn, setUserSignedIn] = useState(AsyncStorage.getItem('user'))
-  const [accessToken, setAccessToken] = useState(AsyncStorage.getItem('access_token'))
+  // const [userSignedIn, setUserSignedIn] = useState(AsyncStorage.getItem('user'))
+  // const [accessToken, setAccessToken] = useState(AsyncStorage.getItem('access_token'))
 
   const navigateToProgram = () => {
     navigation.navigate('Program');

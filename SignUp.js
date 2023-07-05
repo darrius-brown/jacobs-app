@@ -62,7 +62,7 @@ function SignUp() {
       />
       <TextInput
         style={styles.input}
-        placeholder="Reenter Password"
+        placeholder="Re enter Password"
         onChangeText={(text) => handleChange(text, 'password_check')}
         value={formInfo.password_check}
         secureTextEntry={true}
