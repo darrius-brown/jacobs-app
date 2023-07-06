@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, TextInput, Button } from 'react-native'
 import { styles } from './styles';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,9 +12,6 @@ function SignIn() {
     password: ''
   })
 
-  // const [userSignedIn, setUserSignedIn] = useState(AsyncStorage.getItem('user'))
-  // const [accessToken, setAccessToken] = useState(AsyncStorage.getItem('access_token'))
-
   const navigateToProgram = () => {
     navigation.navigate('Program');
   };
@@ -23,56 +20,43 @@ function SignIn() {
     setFormInfo({ ...formInfo, [inputName]: text });
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    fetch('http://localhost:8000/login/', 
-      {
-          method: 'POST',
-          headers: {
-              'Content-Type':'application/json',
-          },
-          body: JSON.stringify(formInfo)
-      }
-  )
-  .then(res => {
-      if (res.ok) {
-          return res.json()
-      } else {
-          return Promise.resolve(null)
-      }
-  })
-  .then(data => {
-      if (!data) {
-          setNetworkErrMsg('The username or password you entered in incorrect.')
-          setClientErrMsg('The username or password you entered in incorrect.')
-          console.log(`problem with network request: ${networkErrMsg}`)
-          console.log('data = ' + data)
-      } else {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8000/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formInfo),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        const authToken = data.access;
+        const user = data.username
+        await AsyncStorage.setItem('authToken', authToken);
+        await AsyncStorage.setItem('user', user);
+        navigateToProgram()
 
-          console.log('data' + data)
-          console.log('access_token', data.access)
-          console.log('user', formInfo.username)
-
-          setUserSignedIn(formInfo.username)
-          setAccessToken(data.access)
-          
-          AsyncStorage.setItem('access_token', data.access)
-          AsyncStorage.setItem('user', formInfo.username)
-          navigateToProgram()
-          }
-      })
+      } else {
+        console.log('Login failed');
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
   return (
     <View style={styles.formContainer}>
       <TextInput
         style={styles.input}
-        placeholder="First Name"
+        placeholder="Username"
         onChangeText={(text) => handleChange(text, 'username')}
         value={formInfo.username}
       />
       <TextInput
         style={styles.input}
-        placeholder="Last Name"
+        placeholder="Password"
         onChangeText={(text) => handleChange(text, 'password')}
         value={formInfo.password}
         secureTextEntry={true}

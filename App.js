@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'react-native';
-// import AsyncStorage from '@react-native-community/async-storage';
 import Home from './Home';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Program from './Program';
 import { styles } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +26,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{ title: 'Home' }} />
-        <Stack.Screen name="Sign In Page" component={SignIn} options={{ title: 'Sign In ' }} />
+        <Stack.Screen name="Sign In Page" component={SignIn} options={{ title: 'Sign In' }} />
         <Stack.Screen name='Sign Up Page' component={SignUp} options={{title: 'Sign Up'}}/>
         <Stack.Screen name='Program' component={Program} options={{title: 'Program'}}/>
       </Stack.Navigator>

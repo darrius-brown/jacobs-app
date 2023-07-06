@@ -12,6 +12,10 @@ function SignUp() {
     password_check: ''
   });
 
+  const navigateToHome = () => {
+    navigation.navigate('Home');
+  };
+
   const handleChange = (text, inputName) => {
     setFormInfo({ ...formInfo, [inputName]: text });
   };
@@ -24,6 +28,7 @@ function SignUp() {
       last_name: formInfo.last_name,
       email: formInfo.email,
       })
+    navigateToHome()
   };
 
   return (

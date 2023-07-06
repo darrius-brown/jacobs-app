@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Button, Text, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function Home() {
+function Home(props) {
   const navigation = useNavigation();
 
   const navigateToSignIn = () => {
