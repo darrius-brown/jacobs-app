@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
+      backgroundColor: 'black',
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -33,5 +34,20 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 16,
         paddingHorizontal: 8,
+      },
+      card: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8,
+        padding: 16,
+        marginBottom: 16,
+        elevation: 2,
+      },
+      dayText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+      },
+      workoutText: {
+        fontSize: 14,
       },
   });

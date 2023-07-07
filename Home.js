@@ -5,6 +5,8 @@ import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Home(props) {
+  const [userSignedIn, setUserSignedIn] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
   const navigation = useNavigation();
 
   const navigateToSignIn = () => {
@@ -14,6 +16,32 @@ function Home(props) {
   const navigateToSignUp = () => {
     navigation.navigate('Sign Up Page');
   };
+
+  const navigateToProgram = () => {
+    navigation.navigate('Program');
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = await AsyncStorage.getItem('user');
+        const token = await AsyncStorage.getItem('access_token');
+        setUserSignedIn(user);
+        setAccessToken(token);
+        console.log('user signed in: ' + user + token);
+      } catch (error) {
+        console.log('Error retrieving data from AsyncStorage:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [])
+
+  useEffect(() => {
+    if (userSignedIn) {
+      navigateToProgram();
+    }
+  }, [userSignedIn]);
 
   return (
     <View style={styles.container}>
