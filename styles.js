@@ -35,19 +35,56 @@ export const styles = StyleSheet.create({
         marginBottom: 16,
         paddingHorizontal: 8,
       },
-      card: {
-        backgroundColor: '#FFFFFF',
+      chart: {
+        backgroundColor: 'black',
         borderRadius: 8,
         padding: 16,
-        marginBottom: 16,
         elevation: 2,
       },
-      dayText: {
-        fontSize: 18,
+      header: {
+        flexDirection: 'row',
+        marginBottom: 8,
+        textAlign: 'center',
+      },
+      headerText: {
+        flex: 1,
         fontWeight: 'bold',
+        fontSize: 16,
+        color: 'white',
+      },
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: 8,
       },
       workoutText: {
+        flex: 1,
         fontSize: 14,
+        color: 'white',
+      },
+      repsText: {
+        flex: 1,
+        fontSize: 14,
+        textAlign: 'right',
+        color: 'white',
+        marginBottom: 10,
+      },
+      pageContainer: {
+        flex: 1,
+      },
+      page: {
+        flex: 1,
+        backgroundColor: 'black',
+        paddingHorizontal: 10,
+        paddingVertical: 40,
+        borderWidth: 1,
+        borderColor: 'white',
+      },
+      column: {
+        flexDirection: 'column',
+        marginBottom: 100,
+      },
+      alignRight: {
+        textAlign: 'right',
       },
   });
