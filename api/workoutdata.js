@@ -19,3 +19,21 @@ import axios from "axios";
       return res.data
     })
   }
+
+  export function createProgram(content, userId, program) {
+    const URL = `http://localhost:8000/create/program/${userId}/${program}/`
+    const {  user_id, email } = content;
+    
+    return axios.post(URL, {
+      user: {id: user_id,
+      email: email}
+    })
+    .then(res => {
+      return res.data;
+    })  
+    .catch((error) => {
+      if (error.response && error.response.status === 400) {
+        console.error(error);
+      }
+    });
+  }

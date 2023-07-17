@@ -1,23 +1,24 @@
 import axios from "axios";
 
 export function postSignUp(content) {
-    const URL = `http://localhost:8000/signup/`
-    const {username, password, first_name, last_name, email} = content 
-      return axios.post(URL, {
-        username: username,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
-        email: email,
-      })
-      .then(res => {
-        return res.data
-      })  
-      .catch((error) => {
-        if (error.response.status === 400) {
+    const URL = `http://localhost:8000/signup/`;
+    const { username, password, first_name, last_name, email } = content;
+    
+    return axios.post(URL, {
+      username: username,
+      password: password,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+    })
+    .then(res => {
+      return res.data;
+    })  
+    .catch((error) => {
+      if (error.response && error.response.status === 400) {
         console.error(error);
-        }
-      });  
+      }
+    });
   }
 
   export function postSignIn() {

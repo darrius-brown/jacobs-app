@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, TextInput, Button, TouchableOpacity, Modal, Text } from 'react-native';
 import { postSignUp } from './api/forms';
+import { createProgram } from './api/workoutdata';
 import { styles } from './styles';
 function SignUp() {
+  const [selectedItem, setSelectedItem] = useState('');
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [program, setProgram] = useState(3)
+  const items = ['Item 1', 'Item 2', 'Item 3'];
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const selectItem = (item) => {
+    setSelectedItem(item);
+    setDropdownVisible(false);
+  };
+
+  const navigation = useNavigation();
   const [formInfo, setFormInfo] = useState({
     username: '',
     password: '',
@@ -28,6 +45,17 @@ function SignUp() {
       last_name: formInfo.last_name,
       email: formInfo.email,
       })
+
+      .then(responseData => {
+        console.log(responseData);
+        createProgram({
+          user_id: responseData.id,
+          email: formInfo.email
+        },
+        responseData.id,
+        program) 
+      })
+
     navigateToHome()
   };
 
@@ -72,6 +100,27 @@ function SignUp() {
         value={formInfo.password_check}
         secureTextEntry={true}
       />
+      {/* <TouchableOpacity style={styles.inputContainer} onPress={toggleDropdown}>
+        <Text style={styles.inputText}>{selectedItem || 'Select an item'}</Text>
+      </TouchableOpacity>
+      <Modal
+        visible={dropdownVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setDropdownVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          {items.map((item) => (
+            <TouchableOpacity
+              key={item}
+              style={styles.dropdownItem}
+              onPress={() => selectItem(item)}
+            >
+              <Text style={styles.dropdownItemText}>{item}</Text>
+            </TouchableOpacity>
+          ))} */}
+        {/* </View>
+      </Modal> */}
       <Button title="Submit" onPress={handleSubmit} />
     </View>
   );
