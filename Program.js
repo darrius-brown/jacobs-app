@@ -42,7 +42,6 @@ function Program() {
   const divs = database.map((item) => {
     return (
       <View style={styles.row}>
-        <Text key={item.id} style={styles.repsText}>Day {item.day}</Text>
         <Text key={item.id} style={styles.workoutText}>{item.exercise}</Text>
       </View>
     )
@@ -60,13 +59,13 @@ function Program() {
             exerciseText.push(
               <View key={i} style={styles.row}>
                 <Text style={styles.workoutText}>{item.exercise[i]}</Text>
-                <Text style={styles.repsText}>3 x 10</Text>
+                <Text style={styles.repsText}>2 x 12</Text>
               </View>
             );
           }
           return (
             <View key={index} style={styles.page}>
-            <Text style={styles.title}>Day {item.day} </Text>
+            <Text style={styles.title}>Day {index + 1} </Text>
             <View style={styles.row}>
               <Text style={styles.headerText}>Workout</Text>
               <Text style={[styles.headerText, styles.alignRight]}>Reps</Text>

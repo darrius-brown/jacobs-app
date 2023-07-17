@@ -87,4 +87,39 @@ export const styles = StyleSheet.create({
       alignRight: {
         textAlign: 'right',
       },
+      inputContainer: {
+        backgroundColor: '#eaeaea',
+        padding: 10,
+        borderRadius: 5,
+        borderWidth: 1,
+        marginBottom: 10,
+      },
+      inputText: {
+        fontSize: 16,
+      },
+      modalContainer: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      dropdownItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+      },
+      dropdownItemText: {
+        fontSize: 16,
+      },
+      button: {
+        marginTop: 20,
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+      },
+      buttonText: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+      },
   });

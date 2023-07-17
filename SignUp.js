@@ -8,15 +8,33 @@ function SignUp() {
   const [selectedItem, setSelectedItem] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [program, setProgram] = useState(3)
-  const items = ['Item 1', 'Item 2', 'Item 3'];
+  const [selectedItemLength, setSelectedItemLength] = useState('');
+  const [dropdownVisibleLength, setDropdownVisibleLength] = useState(false);
+  const [textInputValueLength, setTextInputValueLength] = useState('');
+  const [selectedItemTime, setSelectedItemTime] = useState('');
+  const [dropdownVisibleTime, setDropdownVisibleTime] = useState(false);
+  const [textInputValueTime, setTextInputValueTime] = useState('');
+  const program_length = ['1 day', '2 days', '3 days', '4 days'];
+  const program_time = ['Less than an hour', 'More than an hour']
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+  const toggleDropdownLength = () => {
+    setDropdownVisibleLength(!dropdownVisibleLength);
   };
 
-  const selectItem = (item) => {
-    setSelectedItem(item);
-    setDropdownVisible(false);
+  const toggleDropdownTime = () => {
+    setDropdownVisibleTime(!dropdownVisibleTime);
+  };
+
+  const selectItemLength = (item) => {
+    setFormInfo({ ...formInfo, program_length: item });
+    setSelectedItemLength(item);
+    setDropdownVisibleLength(false);
+  };
+
+  const selectItemTime = (item) => {
+    setFormInfo({ ...formInfo, program_time: item })
+    setSelectedItemTime(item);
+    setDropdownVisibleTime(false);
   };
 
   const navigation = useNavigation();
@@ -26,7 +44,9 @@ function SignUp() {
     first_name: '',
     last_name: '',
     email: '',
-    password_check: ''
+    password_check: '',
+    program_length: '',
+    program_time: ''
   });
 
   const navigateToHome = () => {
@@ -38,25 +58,48 @@ function SignUp() {
   };
 
   const handleSubmit = () => {
+    console.log(formInfo);
     postSignUp({
       username: formInfo.username,
       password: formInfo.password,
       first_name: formInfo.first_name,
       last_name: formInfo.last_name,
       email: formInfo.email,
-      })
-
-      .then(responseData => {
-        console.log(responseData);
-        createProgram({
+      program_length: formInfo.program_length,
+      program_time: formInfo.program_time,
+    }).then((responseData) => {
+      let updatedProgram;
+  
+      if (formInfo.program_length === '1 day' && formInfo.program_time === 'Less than an hour') {
+        updatedProgram = 1;
+      } else if (formInfo.program_length === '1 day' && formInfo.program_time === 'More than an hour') {
+        updatedProgram = 2;
+      } else if (formInfo.program_length === '2 days' && formInfo.program_time === 'Less than an hour') {
+        updatedProgram = 3;
+      } else if (formInfo.program_length === '2 days' && formInfo.program_time === 'More than an hour') {
+        updatedProgram = 4;
+      } else if (formInfo.program_length === '3 days' && formInfo.program_time === 'Less than an hour') {
+        updatedProgram = 5;
+      } else if (formInfo.program_length === '3 days' && formInfo.program_time === 'More than an hour') {
+        updatedProgram = 6;
+      } else if (formInfo.program_length === '4 days' && formInfo.program_time === 'Less than an hour') {
+        updatedProgram = 7;
+      } else if (formInfo.program_length === '4 days' && formInfo.program_time === 'More than an hour') {
+        updatedProgram = 8;
+      }
+  
+      setProgram(updatedProgram);
+  
+      createProgram(
+        {
           user_id: responseData.id,
-          email: formInfo.email
+          email: formInfo.email,
         },
         responseData.id,
-        program) 
-      })
-
-    navigateToHome()
+        updatedProgram
+      );
+      navigateToHome();
+    });
   };
 
   return (
@@ -100,30 +143,58 @@ function SignUp() {
         value={formInfo.password_check}
         secureTextEntry={true}
       />
-      {/* <TouchableOpacity style={styles.inputContainer} onPress={toggleDropdown}>
-        <Text style={styles.inputText}>{selectedItem || 'Select an item'}</Text>
+      <TouchableOpacity style={styles.inputContainer} onPress={toggleDropdownLength}>
+        <Text style={styles.inputText}>{selectedItemLength || 'How many days a week do you plan to work out?'}</Text>
       </TouchableOpacity>
-      <Modal
-        visible={dropdownVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setDropdownVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          {items.map((item) => (
+      {dropdownVisibleLength && (
+        <View style={styles.dropdownContainer}>
+          {program_length.map((item) => (
             <TouchableOpacity
               key={item}
               style={styles.dropdownItem}
-              onPress={() => selectItem(item)}
+              onPress={() => selectItemLength(item)}
             >
               <Text style={styles.dropdownItemText}>{item}</Text>
             </TouchableOpacity>
-          ))} */}
-        {/* </View>
-      </Modal> */}
+          ))}
+          <TextInput
+            style={styles.textInput}
+            value={selectedItemLength}
+            onChangeText={(text) => {
+            handleChange(text, 'program_length');
+            setTextInputValueLength(text);
+  }}
+          />
+        </View>
+      )}
+
+      <TouchableOpacity style={styles.inputContainer} onPress={toggleDropdownTime}>
+        <Text style={styles.inputText}>{selectedItemTime || 'How much time do you have for each day?'}</Text>
+      </TouchableOpacity>
+      {dropdownVisibleTime && (
+        <View style={styles.dropdownContainer}>
+          {program_time.map((item) => (
+            <TouchableOpacity
+              key={item}
+              style={styles.dropdownItem}
+              onPress={() => selectItemTime(item)}
+            >
+              <Text style={styles.dropdownItemText}>{item}</Text>
+            </TouchableOpacity>
+          ))}
+          <TextInput
+            style={styles.textInput}
+            value={selectedItemTime}
+            onChangeText={(text) => {
+            handleChange(text, 'program_time');
+            setTextInputValueTime(text);
+  }}
+          />
+        </View>
+      )}
       <Button title="Submit" onPress={handleSubmit} />
     </View>
   );
-}
+};
 
 export default SignUp;
