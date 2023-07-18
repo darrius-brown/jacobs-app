@@ -1,4 +1,6 @@
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export function postSignUp(content) {
     const URL = `http://localhost:8000/signup/`;
@@ -15,45 +17,36 @@ export function postSignUp(content) {
       return res.data;
     })  
     .catch((error) => {
-      if (error.response && error.response.status === 400) {
-        console.error(error);
-      }
+      console.log(error);
     });
   }
 
-  export function postSignIn() {
-  fetch(loginEndpoint, 
-    {
-        method: 'POST',
-        headers: {
-            'Content-Type':'application/json',
-        },
-        body: JSON.stringify(formState)
-    }
-)
-.then(res => {
-    if (res.ok) {
-        return res.json()
-    } else {
-        return Promise.resolve(null)
-    }
-})
-.then(data => {
-    if (!data) {
-        setNetworkErrMsg('The username or password you entered in incorrect.')
-        setClientErrMsg('The username or password you entered in incorrect.')
-        console.log(`problem with network request: ${networkErrMsg}`)
-        console.log('data = ' + data)
-    } else {
+export function postSignIn(content) {
+  const URL = `http://localhost:8000/login/`;
+  const { username, password } = content;
 
-        console.log('data' + data)
-
-        setUserSignedIn(formState.username)
-        setAccessToken(data.access)
-
-        localStorage.setItem('access_token', data.access)
-        localStorage.setItem('user', formState.username)
-        navigate(`/${formState.username}`)
-        }
+  return axios
+    .post(URL, {
+      username: username,
+      password: password,
     })
+    .then(async (response) => {
+      if (response.status === 200) {
+        const data = response.data;
+        const authToken = data.access;
+        const user = data.username;
+        await AsyncStorage.setItem('authToken', authToken);
+        await AsyncStorage.setItem('user', user);
+      } else {
+        console.log('Login failed');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
+  
+  
+  
+  
+  

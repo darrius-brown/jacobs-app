@@ -4,6 +4,8 @@ import { View, TextInput, Button, TouchableOpacity, Modal, Text } from 'react-na
 import { postSignUp } from './api/forms';
 import { createProgram } from './api/workoutdata';
 import { styles } from './styles';
+import { postSignIn } from './api/forms';
+
 function SignUp() {
   const [selectedItem, setSelectedItem] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -58,7 +60,6 @@ function SignUp() {
   };
 
   const handleSubmit = () => {
-    console.log(formInfo);
     postSignUp({
       username: formInfo.username,
       password: formInfo.password,
@@ -89,6 +90,10 @@ function SignUp() {
       }
   
       setProgram(updatedProgram);
+      postSignIn({
+        username: formInfo.username,
+        password: formInfo.password
+      })
   
       createProgram(
         {
@@ -98,6 +103,7 @@ function SignUp() {
         responseData.id,
         updatedProgram
       );
+
       navigateToHome();
     });
   };
