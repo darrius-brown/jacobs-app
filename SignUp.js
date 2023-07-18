@@ -93,7 +93,7 @@ function SignUp() {
       postSignIn({
         username: formInfo.username,
         password: formInfo.password
-      })
+      });
   
       createProgram(
         {
@@ -162,7 +162,7 @@ function SignUp() {
             >
               <Text style={styles.dropdownItemText}>{item}</Text>
             </TouchableOpacity>
-          ))}
+          ))};
           <TextInput
             style={styles.textInput}
             value={selectedItemLength}
@@ -172,7 +172,7 @@ function SignUp() {
   }}
           />
         </View>
-      )}
+      )};
 
       <TouchableOpacity style={styles.inputContainer} onPress={toggleDropdownTime}>
         <Text style={styles.inputText}>{selectedItemTime || 'How much time do you have for each day?'}</Text>
@@ -187,7 +187,7 @@ function SignUp() {
             >
               <Text style={styles.dropdownItemText}>{item}</Text>
             </TouchableOpacity>
-          ))}
+          ))};
           <TextInput
             style={styles.textInput}
             value={selectedItemTime}
@@ -197,7 +197,7 @@ function SignUp() {
   }}
           />
         </View>
-      )}
+      )};
       <Button title="Submit" onPress={handleSubmit} />
     </View>
   );

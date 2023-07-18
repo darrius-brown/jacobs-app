@@ -28,7 +28,6 @@ function Home(props) {
         const token = await AsyncStorage.getItem('access_token');
         setUserSignedIn(user);
         setAccessToken(token);
-        console.log('user signed in: ' + user + token);
       } catch (error) {
         console.log('Error retrieving data from AsyncStorage:', error);
       }

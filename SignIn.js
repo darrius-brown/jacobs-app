@@ -11,8 +11,6 @@ function SignIn() {
     username: '',
     password: ''
   });
-  const [userSignedIn, setUserSignedIn] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
 
   const navigateToProgram = () => {
     navigation.navigate('Program');
@@ -20,7 +18,7 @@ function SignIn() {
 
   const handleChange = (text, inputName) => {
     setFormInfo({ ...formInfo, [inputName]: text });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,9 +26,8 @@ function SignIn() {
       username: formInfo.username,
       password: formInfo.password
     }) .then(() => {
-    navigateToProgram()
-    })
-      
+    navigateToProgram();
+    }) 
   };
 
   return (
@@ -51,6 +48,6 @@ function SignIn() {
       <Button title="Log in" onPress={handleSubmit} />
     </View>
     )
-  }
+  };
 
 export default SignIn

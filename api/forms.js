@@ -1,7 +1,6 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 export function postSignUp(content) {
     const URL = `http://localhost:8000/signup/`;
     const { username, password, first_name, last_name, email } = content;
@@ -37,7 +36,6 @@ export function postSignIn(content) {
         const user = data.username;
         await AsyncStorage.setItem('authToken', authToken);
         await AsyncStorage.setItem('user', user);
-        console.log(data)
       } else {
         console.log('Login failed');
       }

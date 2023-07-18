@@ -13,10 +13,9 @@ function Program() {
   const getDatabase = () => {
     getProgram(userSignedIn)
       .then((data) => {
-        setDatabase(data)
-        console.log(data)
+        setDatabase(data);
       })
-  }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -25,7 +24,6 @@ function Program() {
         const token = await AsyncStorage.getItem('authToken');
         setUserSignedIn(user);
         setAccessToken(token);
-        console.log('user signed in: ' + user + token);
       } catch (error) {
         console.log('Error retrieving data from AsyncStorage:', error);
       }
@@ -39,14 +37,6 @@ function Program() {
       getDatabase();
     }
   }, [userSignedIn]);
-
-  const divs = database.map((item) => {
-    return (
-      <View style={styles.row}>
-        <Text key={item.id} style={styles.workoutText}>{item.exercise}</Text>
-      </View>
-    )
-  })
 
   return (
     <View style={styles.chart}>
