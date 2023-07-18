@@ -3,6 +3,7 @@ import { View, Text } from 'react-native'
 import { styles } from './styles'
 import { getProgram } from './api/workoutdata'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import SignOut from './SignOut'
 
 function Program() {
   const [database, setDatabase] = useState([])
@@ -21,7 +22,7 @@ function Program() {
     const fetchUserData = async () => {
       try {
         const user = await AsyncStorage.getItem('user');
-        const token = await AsyncStorage.getItem('access_token');
+        const token = await AsyncStorage.getItem('authToken');
         setUserSignedIn(user);
         setAccessToken(token);
         console.log('user signed in: ' + user + token);
@@ -50,6 +51,7 @@ function Program() {
   return (
     <View style={styles.chart}>
       <Text style={styles.title}>{userSignedIn}'s Program</Text>
+      <SignOut/>
       <View style={styles.header}>
       </View>
       <View style={styles.pageContainer}>

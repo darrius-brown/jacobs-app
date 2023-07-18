@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Home';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Program from './Program';
-import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();

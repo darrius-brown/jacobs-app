@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, Text, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from './styles';
+import { StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Home(props) {
@@ -45,13 +45,33 @@ function Home(props) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('./Images/homebackground.png')} style={styles.backgroundImage} opacity={0.9}>
         <Text style={styles.title}>Welcome To Jacob's Fitness Plan!</Text>
         <Button title="Sign in" onPress={navigateToSignIn} />
         <Button title="Don't have an account? " onPress={navigateToSignUp} />
-      </ImageBackground>
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#BDD5EA'
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 20,
+    marginTop: '50%',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default Home;

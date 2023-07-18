@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'black',
+      backgroundColor: '#BDD5EA',
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -20,23 +20,25 @@ export const styles = StyleSheet.create({
       title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'black',
         textAlign: 'center'
       },
       formContainer: {
+        backgroundColor: '#BDD5EA',
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: 16,
       },
       input: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: 'black',
         borderWidth: 1,
         marginBottom: 16,
         paddingHorizontal: 8,
+        color: 'black',
       },
       chart: {
-        backgroundColor: 'black',
+        backgroundColor: '#BDD5EA',
         borderRadius: 8,
         padding: 16,
         elevation: 2,
@@ -50,7 +52,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         fontWeight: 'bold',
         fontSize: 16,
-        color: 'white',
+        color: 'black',
       },
       row: {
         flexDirection: 'row',
@@ -60,13 +62,13 @@ export const styles = StyleSheet.create({
       workoutText: {
         flex: 1,
         fontSize: 14,
-        color: 'white',
+        color: 'black',
       },
       repsText: {
         flex: 1,
         fontSize: 14,
         textAlign: 'right',
-        color: 'white',
+        color: 'black',
         marginBottom: 10,
       },
       pageContainer: {
@@ -74,11 +76,11 @@ export const styles = StyleSheet.create({
       },
       page: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#BDD5EA',
         paddingHorizontal: 10,
         paddingVertical: 40,
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: 'black',
       },
       column: {
         flexDirection: 'column',
@@ -88,7 +90,7 @@ export const styles = StyleSheet.create({
         textAlign: 'right',
       },
       inputContainer: {
-        backgroundColor: '#eaeaea',
+        backgroundColor: '#BDD5EA',
         padding: 10,
         borderRadius: 5,
         borderWidth: 1,
@@ -96,6 +98,7 @@ export const styles = StyleSheet.create({
       },
       inputText: {
         fontSize: 16,
+        backgroundColor: '#BDD5EA'
       },
       modalContainer: {
         flex: 1,
@@ -107,9 +110,12 @@ export const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        borderColor: 'black'
       },
       dropdownItemText: {
         fontSize: 16,
+        borderBottomWidth: 1,
+        borderColor: 'black',
       },
       button: {
         marginTop: 20,
@@ -118,7 +124,7 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
       },
       buttonText: {
-        color: 'white',
+        color: 'black',
         fontSize: 16,
         textAlign: 'center',
       },

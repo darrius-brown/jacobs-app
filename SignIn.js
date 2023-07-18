@@ -11,6 +11,8 @@ function SignIn() {
     username: '',
     password: ''
   });
+  const [userSignedIn, setUserSignedIn] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
 
   const navigateToProgram = () => {
     navigation.navigate('Program');
@@ -25,8 +27,9 @@ function SignIn() {
     postSignIn({
       username: formInfo.username,
       password: formInfo.password
-    })
+    }) .then(() => {
     navigateToProgram()
+    })
       
   };
 

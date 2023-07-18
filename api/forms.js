@@ -37,6 +37,7 @@ export function postSignIn(content) {
         const user = data.username;
         await AsyncStorage.setItem('authToken', authToken);
         await AsyncStorage.setItem('user', user);
+        console.log(data)
       } else {
         console.log('Login failed');
       }
@@ -46,7 +47,6 @@ export function postSignIn(content) {
     });
 }
   
-  
-  
+
   
   
