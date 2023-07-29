@@ -5,6 +5,7 @@ import Home from './Home';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Program from './Program';
+import Edit from './Edit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="Sign In Page" component={SignIn} options={{ title: 'Sign In' }} />
         <Stack.Screen name='Sign Up Page' component={SignUp} options={{title: 'Sign Up'}}/>
         <Stack.Screen name='Program' component={Program} options={{title: 'Program'}}/>
+        <Stack.Screen name='Edit Program' component={Edit} options={{title: 'Edit Program'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
